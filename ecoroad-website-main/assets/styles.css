@@ -1,0 +1,1998 @@
+/* =========================================================
+   ECOROAD LANDING PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #faf9f6;
+    color: #182235;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.navbar {
+    width: min(1300px, 94%);
+    min-height: 80px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 30px;
+}
+
+.logo-title {
+    font-size: 22px;
+    font-weight: 800;
+
+    color: #173d2b;
+}
+
+.logo-title span {
+    color: #10ad79;
+}
+
+.logo small {
+    display: block;
+
+    margin-top: -4px;
+
+    font-size: 7px;
+
+    letter-spacing: 0.7px;
+
+    color: #7a8391;
+}
+
+
+/* ================= LINKS ================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    font-size: 14px;
+}
+
+.nav-links a {
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #08724a;
+}
+
+
+/* ================= NAV ACTIONS ================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.signin {
+    margin-right: 8px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 13px 24px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.btn-dark,
+.btn-primary {
+    background: #075f3b;
+
+    color: white;
+}
+
+.btn-dark:hover,
+.btn-primary:hover {
+    background: #064c31;
+}
+
+.btn-outline {
+    background: white;
+
+    border: 1px solid #dedede;
+
+    color: #075f3b;
+}
+
+
+/* =========================================================
+   LANGUAGE BUTTON
+   ========================================================= */
+
+.language-btn {
+    height: 46px;
+
+    padding: 0 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border: 1px solid #0b6848;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #075f3b;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.language-btn:hover {
+    background: #eafaf4;
+
+    color: #064c31;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    padding: 70px 0 40px;
+
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 15px;
+
+    border-radius: 30px;
+
+    background: #eafaf4;
+
+    color: #08704c;
+
+    font-size: 13px;
+}
+
+.hero-badge span {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #17ca92;
+}
+
+.hero h1 {
+    margin-top: 25px;
+
+    font-size: clamp(38px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    color: #0e5b3b;
+}
+
+.hero-description {
+    max-width: 780px;
+
+    margin: 25px auto;
+
+    font-size: 18px;
+
+    color: #485467;
+}
+
+.hero-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-bottom: 55px;
+}
+
+
+/* ================= HERO IMAGE ================= */
+
+.hero-image {
+    position: relative;
+
+    max-width: 1000px;
+    height: 550px;
+
+    margin: auto;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    background: #365c4e;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ================= TELEMETRY ================= */
+
+.telemetry-bar {
+    position: absolute;
+
+    bottom: 24px;
+    left: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px 22px;
+
+    border-radius: 9px;
+
+    background: #172033;
+
+    color: white;
+
+    font-size: 12px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #13c98d;
+}
+
+.green-text {
+    color: #24d39b;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+.section {
+    padding: 100px 0;
+
+    border-top: 1px solid #ececec;
+}
+
+.section-header {
+    max-width: 850px;
+
+    margin: 0 auto 55px;
+
+    text-align: center;
+}
+
+.section-header h2 {
+    margin-bottom: 18px;
+
+    font-size: clamp(30px, 4vw, 42px);
+
+    line-height: 1.15;
+
+    color: #0d5a39;
+}
+
+.section-header p {
+    color: #657083;
+}
+
+.section-tag {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 6px 20px;
+
+    border-radius: 50px;
+
+    background: #eca942;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SOLUTIONS
+   ========================================================= */
+
+.solutions-grid {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.solution-card {
+    padding: 35px;
+
+    border-radius: 16px;
+
+    background: #f1f6f4;
+
+    transition: 0.25s;
+}
+
+.solution-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.07);
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 25px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 20px;
+}
+
+.solution-card h3 {
+    margin-bottom: 12px;
+
+    color: #145d3d;
+}
+
+.solution-card p {
+    min-height: 90px;
+
+    font-size: 14px;
+
+    color: #657083;
+}
+
+.card-footer {
+    margin-top: 20px;
+
+    padding-top: 17px;
+
+    border-top: 1px solid #dde8e3;
+
+    color: #08734d;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   BENEFITS
+   ========================================================= */
+
+.benefits-section {
+    background: #fffefa;
+}
+
+.benefits-grid {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 28px;
+}
+
+.benefit-card {
+    overflow: hidden;
+
+    background: white;
+
+    border: 1px solid #dedede;
+
+    border-radius: 14px;
+
+    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================= BENEFIT IMAGES ================= */
+
+.benefit-image {
+    position: relative;
+
+    width: 100%;
+    height: 240px;
+
+    overflow: hidden;
+
+    background: #efefef;
+}
+
+.benefit-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ================= COMPLIANCE ================= */
+
+.compliance {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    background: #08a876;
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ================= EXPERT BADGE ================= */
+
+.expert-badge {
+    position: absolute;
+
+    bottom: 15px;
+    left: 15px;
+
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: #172033;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.13);
+}
+
+
+/* ================= GREEN BENEFIT ================= */
+
+.benefit-dark {
+    height: 240px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b6848,
+            #073b31
+        );
+
+    color: white;
+}
+
+.benefit-dark small {
+    color: #2bdca8;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.benefit-dark strong {
+    font-size: 16px;
+
+    text-align: center;
+}
+
+
+/* ================= BLUE BENEFIT ================= */
+
+.benefit-blue {
+    height: 240px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111d34,
+            #0a1324
+        );
+
+    color: white;
+}
+
+.benefit-blue small {
+    color: #19d8a0;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.benefit-blue strong {
+    font-size: 16px;
+
+    text-align: center;
+}
+
+
+/* ================= BENEFIT ICONS ================= */
+
+.benefit-icon {
+    width: 55px;
+    height: 55px;
+
+    object-fit: contain;
+
+    margin-bottom: 5px;
+}
+
+
+/* ================= BENEFIT CONTENT ================= */
+
+.benefit-content {
+    padding: 26px;
+}
+
+.benefit-content h3 {
+    margin-bottom: 12px;
+
+    color: #172033;
+}
+
+.benefit-content p {
+    margin-bottom: 15px;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+.benefit-content small {
+    color: #07855a;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.features-layout {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 40px;
+}
+
+
+/* ================= VIDEO ================= */
+
+.video-demo {
+    position: relative;
+
+    min-height: 330px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 9px solid #ecd8af;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/highway-hero.png")
+        center / cover
+        no-repeat;
+}
+
+.live-label {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    padding: 7px 12px;
+
+    border-radius: 5px;
+
+    background: #142038;
+
+    color: white;
+
+    font-size: 11px;
+}
+
+.play-button {
+    width: 75px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #ef2727;
+
+    color: white;
+
+    font-size: 24px;
+}
+
+.video-status {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    background: rgba(10, 19, 35, 0.9);
+
+    color: white;
+
+    font-size: 10px;
+}
+
+
+/* ================= FEATURE LIST ================= */
+
+.feature-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.feature-item {
+    overflow: hidden;
+
+    background: white;
+
+    border: 1px solid #dedede;
+
+    border-radius: 11px;
+
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+}
+
+.feature-title {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 22px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #126040;
+
+    font-weight: 700;
+
+    text-align: left;
+}
+
+.feature-content {
+    padding: 0 22px 20px;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
+
+.testimonials-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+}
+
+.testimonial {
+    padding: 28px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 13px;
+}
+
+.stars {
+    margin-bottom: 15px;
+
+    color: #e6a23c;
+
+    letter-spacing: 3px;
+}
+
+.testimonial p {
+    min-height: 130px;
+
+    color: #596274;
+
+    font-style: italic;
+}
+
+.testimonial-user {
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    color: #14704b;
+}
+
+.testimonial-user strong {
+    color: #222;
+}
+
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+
+.pricing-section {
+    background: #fffefa;
+}
+
+.billing-switch {
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 50px;
+}
+
+.billing {
+    padding: 12px 18px;
+
+    border: none;
+
+    background: #eee;
+
+    font-weight: 600;
+}
+
+.billing:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.billing:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.billing.active {
+    background: #183f38;
+
+    color: white;
+}
+
+
+/* ================= PRICING GRID ================= */
+
+.pricing-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.price-card {
+    position: relative;
+
+    min-height: 570px;
+
+    padding: 35px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 20px;
+}
+
+.price-card h3 {
+    margin: 7px 0;
+
+    color: #125b3b;
+}
+
+.price-card p {
+    color: #687285;
+
+    font-size: 13px;
+}
+
+.price {
+    margin: 25px 0;
+
+    color: #10182a;
+
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.price span {
+    color: #687285;
+
+    font-size: 13px;
+}
+
+.plan-button {
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+}
+
+.price-card h4 {
+    margin-bottom: 15px;
+
+    font-size: 11px;
+}
+
+.price-card ul {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    list-style: none;
+
+    font-size: 13px;
+}
+
+
+/* ================= PROFESSIONAL ================= */
+
+.featured-plan {
+    transform: scale(1.05);
+
+    background: #193f39;
+
+    color: white;
+
+    border: 2px solid #0cbb82;
+}
+
+.featured-plan h3,
+.featured-plan .price,
+.featured-plan p {
+    color: white;
+}
+
+.popular {
+    position: absolute;
+
+    top: -14px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 5px 14px;
+
+    border-radius: 20px;
+
+    background: #13bf89;
+
+    color: #053c2d;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.professional {
+    background: #11bd87;
+
+    color: #0b3529;
+}
+
+.enterprise {
+    background: #0f613f;
+
+    color: white;
+}
+
+
+/* =========================================================
+   TEAM
+   ========================================================= */
+
+.team-section {
+    background: #fffefa;
+}
+
+.team-grid {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+}
+
+.team-card {
+    min-height: 330px;
+
+    padding: 32px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 18px;
+
+    text-align: center;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border: 3px solid #1cca95;
+
+    background: #dcf7ee;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.team-card h3 {
+    margin-bottom: 12px;
+
+    color: #e49e32;
+
+    font-size: 16px;
+}
+
+.team-card p {
+    color: #5f687a;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CONTACT / CTA
+   ========================================================= */
+
+.contact-section {
+    padding: 80px 0 0;
+}
+
+.cta {
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 50px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #064c31,
+            #163934
+        );
+
+    color: white;
+
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.15);
+}
+
+.cta h2 {
+    margin-bottom: 18px;
+
+    font-size: 34px;
+
+    line-height: 1.15;
+}
+
+.cta p {
+    max-width: 700px;
+
+    font-size: 14px;
+}
+
+.cta-buttons {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.btn-light {
+    background: #1dd3a0;
+
+    color: #072e25;
+}
+
+.btn-transparent {
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    color: white;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    margin-top: 80px;
+
+    padding: 60px 0 30px;
+
+    background: #0c162a;
+
+    color: #8f99aa;
+}
+
+
+/* ================= FOOTER GRID ================= */
+
+.footer-grid {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+
+    gap: 55px;
+}
+
+
+/* ================= FOOTER BRAND ================= */
+
+.footer-brand {
+    max-width: 320px;
+}
+
+.footer-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.footer-logo-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 20px;
+}
+
+.footer-logo h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 24px;
+}
+
+.footer-logo h2 span {
+    color: #20d19b;
+}
+
+.footer-brand p {
+    margin-bottom: 16px;
+
+    color: #8f99aa;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+.footer-brand em {
+    color: white;
+
+    font-size: 12px;
+}
+
+
+/* ================= FOOTER COLUMNS ================= */
+
+.footer-column h4 {
+    margin-bottom: 18px;
+
+    color: white;
+
+    font-size: 12px;
+
+    letter-spacing: 0.3px;
+}
+
+.footer-column p {
+    margin-bottom: 8px;
+
+    color: #8f99aa;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.footer-column a {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #21d5a0;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-cities {
+    margin-top: 12px;
+}
+
+
+/* ================= FOOTER BOTTOM ================= */
+
+.footer-bottom {
+    width: min(1200px, 90%);
+
+    margin: 45px auto 0;
+
+    padding-top: 28px;
+
+    border-top: 1px solid #21304b;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: #667085;
+
+    font-size: 10px;
+}
+
+.footer-links {
+    display: flex;
+
+    gap: 28px;
+}
+
+.footer-links a {
+    color: #667085;
+
+    font-size: 10px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        gap: 18px;
+    }
+
+    .nav-links {
+        gap: 18px;
+
+        font-size: 13px;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .btn-dark {
+        padding: 12px 17px;
+    }
+
+    .language-btn {
+        padding: 0 12px;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .container {
+        width: 92%;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+        min-height: 70px;
+
+        padding: 8px 0;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .logo small {
+        display: none;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+        padding-top: 50px;
+    }
+
+    .hero h1 {
+        font-size: 44px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .hero-image {
+        height: 420px;
+    }
+
+
+    /* ================= SOLUTIONS ================= */
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .solution-card p {
+        min-height: auto;
+    }
+
+
+    /* ================= BENEFITS ================= */
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ================= FEATURES ================= */
+
+    .features-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial p {
+        min-height: auto;
+    }
+
+
+    /* ================= PRICING ================= */
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+        margin: auto;
+    }
+
+    .featured-plan {
+        transform: none;
+    }
+
+
+    /* ================= TEAM ================= */
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 40px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* ================= GENERAL ================= */
+
+    .container {
+        width: 90%;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+        min-height: 64px;
+
+        gap: 6px;
+    }
+
+    .logo {
+        gap: 5px;
+    }
+
+    .logo-icon {
+        font-size: 21px;
+    }
+
+    .logo-title {
+        font-size: 17px;
+    }
+
+    .logo small {
+        display: none;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-actions .signin {
+        display: none;
+    }
+
+    .btn-dark {
+        padding: 9px 11px;
+
+        border-radius: 8px;
+
+        font-size: 10px;
+    }
+
+
+    /* LANGUAGE */
+
+    .language-btn {
+        height: 36px;
+
+        padding: 0 9px;
+
+        border-radius: 8px;
+
+        font-size: 10px;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+        padding: 40px 0 20px;
+    }
+
+    .hero-badge {
+        max-width: 95%;
+
+        padding: 6px 10px;
+
+        font-size: 10px;
+    }
+
+    .hero h1 {
+        margin-top: 20px;
+
+        font-size: 34px;
+
+        line-height: 1.08;
+
+        letter-spacing: -1px;
+    }
+
+    .hero-description {
+        margin: 20px auto;
+
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        max-width: 300px;
+
+        margin: 25px auto 35px;
+
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-image {
+        height: 270px;
+
+        border-radius: 15px;
+    }
+
+    .telemetry-bar {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+
+        padding: 8px 10px;
+
+        gap: 5px;
+
+        flex-wrap: wrap;
+
+        font-size: 8px;
+    }
+
+
+    /* ================= HEADERS ================= */
+
+    .section-header {
+        margin-bottom: 35px;
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .section-header p {
+        font-size: 14px;
+    }
+
+    .section-tag {
+        margin-bottom: 14px;
+
+        font-size: 10px;
+    }
+
+
+    /* ================= SOLUTIONS ================= */
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .solution-card {
+        padding: 24px;
+    }
+
+    .solution-card p {
+        min-height: auto;
+    }
+
+
+    /* ================= BENEFITS ================= */
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .benefit-image,
+    .benefit-dark,
+    .benefit-blue {
+        height: 210px;
+    }
+
+    .benefit-content {
+        padding: 20px;
+    }
+
+    .benefit-content h3 {
+        font-size: 18px;
+    }
+
+    .benefit-content p {
+        font-size: 13px;
+    }
+
+
+    /* ================= FEATURES ================= */
+
+    .features-layout {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .video-demo {
+        min-height: 230px;
+
+        border-width: 6px;
+    }
+
+    .live-label {
+        top: 10px;
+        left: 10px;
+
+        font-size: 9px;
+    }
+
+    .video-status {
+        flex-direction: column;
+
+        font-size: 8px;
+    }
+
+    .feature-title {
+        padding: 18px;
+
+        font-size: 13px;
+    }
+
+    .feature-content {
+        padding: 0 18px 18px;
+
+        font-size: 12px;
+    }
+
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial {
+        padding: 22px;
+    }
+
+    .testimonial p {
+        min-height: auto;
+
+        font-size: 13px;
+    }
+
+
+    /* ================= PRICING ================= */
+
+    .billing-switch {
+        margin-bottom: 35px;
+    }
+
+    .billing {
+        padding: 10px;
+
+        font-size: 11px;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .price-card {
+        min-height: auto;
+
+        padding: 28px 22px;
+    }
+
+    .featured-plan {
+        transform: none;
+    }
+
+    .price {
+        font-size: 36px;
+    }
+
+
+    /* ================= TEAM ================= */
+
+    .team-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 420px;
+    }
+
+    .team-card {
+        min-height: auto;
+
+        padding: 26px;
+    }
+
+    .avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    /* ================= CTA ================= */
+
+    .contact-section {
+        padding: 50px 0 0;
+    }
+
+    .cta {
+        padding: 30px 22px;
+
+        border-radius: 16px;
+    }
+
+    .cta h2 {
+        font-size: 25px;
+    }
+
+    .cta h2 br {
+        display: none;
+    }
+
+    .cta p {
+        font-size: 13px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+        margin-top: 50px;
+
+        padding: 45px 0 25px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        margin-top: 35px;
+
+        padding-top: 22px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .logo-title {
+        font-size: 15px;
+    }
+
+    .btn-dark {
+        padding: 8px 9px;
+
+        font-size: 9px;
+    }
+
+    .language-btn {
+        padding: 0 7px;
+
+        font-size: 9px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero-image {
+        height: 235px;
+    }
+
+    .section-header h2 {
+        font-size: 25px;
+    }
+
+    .cta h2 {
+        font-size: 22px;
+    }
+
+    .telemetry-bar {
+        font-size: 7px;
+    }
+
+}
