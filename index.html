@@ -1,1782 +1,647 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoRoad — Automated Environmental Compliance for Highway Construction</title>
+  <meta name="description" content="Centralize, analyze, and automate environmental monitoring in real time for highway construction." />
 
-    <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] },
+          colors: {
+            pine:  { 50: '#EFF6F3', 100: '#DCEBE4', 200: '#B9D7C9', 400: '#34D399', 500: '#10B981', 600: '#0E8A5F', 700: '#14633F', 800: '#124A30', 900: '#0F4A2E' },
+            paper: '#FAF9F5',
+            gold:  '#DDA94B',
+            navy:  '#111827',
+            night: '#141B33'
+          },
+          boxShadow: {
+            card: '0 1px 2px rgba(17,24,39,.05), 0 6px 20px rgba(17,24,39,.07)',
+            lift: '0 10px 30px rgba(15,74,46,.18)'
+          }
+        }
+      }
+    }
+  </script>
 
-    <title>
-        EcoRoad | Environmental Road Monitoring
-    </title>
+  <style>
+    /* Placeholders de imagen: sustituye cada .ph por <img src="..." class="h-full w-full object-cover"> con tus assets de Figma */
+    .ph { position: relative; overflow: hidden; background: linear-gradient(180deg, #bfe0ee 0%, #8fbfa3 38%, #2f7a52 70%, #17452f 100%); }
+    .ph::after { content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(90% 60% at 15% 38%, rgba(70,105,95,.75) 0 38%, transparent 39%),
+        radial-gradient(80% 55% at 70% 34%, rgba(95,125,115,.7) 0 36%, transparent 37%),
+        radial-gradient(120% 70% at 30% 115%, rgba(18,60,40,.9) 0 45%, transparent 46%),
+        linear-gradient(112deg, transparent 54%, rgba(225,225,220,.85) 55% 58%, transparent 59%); }
+    .ph-site { background: linear-gradient(180deg, #cfd9d2 0%, #9fb3a2 45%, #7d6f5a 100%); }
+    .panel-green { background: linear-gradient(160deg, #0F4A2E 0%, #14633F 55%, #0B3A25 100%); }
+    .panel-night { background: linear-gradient(160deg, #141B33 0%, #1B2442 100%); }
 
-    <link rel="stylesheet"
-          href="assets/styles.css">
+    section[id], #features { scroll-margin-top: 76px; } /* compensa el navbar fijo */
+    #nav-links a.active { color: #0E8A5F; font-weight: 700; }
 
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .3s ease, opacity .25s ease; }
+    #mobile-menu.open { max-height: 34rem; opacity: 1; }
+
+    .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+    .acc-panel > div { overflow: hidden; }
+    .acc-item.open .acc-panel { grid-template-rows: 1fr; }
+    .acc-item .chev { transition: transform .3s ease; }
+    .acc-item.open .chev { transform: rotate(180deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .acc-panel, .acc-item .chev, #mobile-menu { transition: none; }
+    }
+  </style>
 </head>
 
-
-<body>
-
-
-    <!-- ==================================================
-         NAVBAR
-    =================================================== -->
-
-    <header class="header">
-
-        <nav class="navbar">
-
-
-            <!-- LOGO -->
-
-            <a href="#home"
-               class="logo">
-
-                <div class="logo-icon">
-                    🌿
-                </div>
-
-                <div>
-
-                    <span class="logo-title">
-                        Eco<span>Road</span>
-                    </span>
-
-                    <small>
-                        SUSTAINABLE ROAD INFRASTRUCTURE TELEMETRY
-                    </small>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- LINKS -->
-
-            <div class="nav-links">
-
-                <a href="#home">
-                    Home
-                </a>
-
-                <a href="#solutions">
-                    Solutions
-                </a>
-
-                <a href="#benefits">
-                    Benefits
-                </a>
-
-                <a href="#features">
-                    Features
-                </a>
-
-                <a href="#pricing">
-                    SaaS Plans
-                </a>
-
-                <a href="#testimonials">
-                    Case Studies
-                </a>
-
-            </div>
-
-
-
-            <!-- ACTIONS -->
-
-           <div class="nav-actions">
-            <a href="#contact"
-            class="signin"
-            id="signInText">
-            Sign In
-            </a>
-
-            <a href="#contact"
-            class="btn btn-dark"
-            id="requestDemoText">
-            Request Demo
-            </a>
-            
-            <button id="languageToggle"
-            class="language-btn">
-            🌐 ES
-            </button>
-            </div>
-
-
-        </nav>
-
-    </header>
-
-
-
-
-
-    <main>
-
-
-        <!-- ==================================================
-             HERO
-        =================================================== -->
-
-        <section id="home"
-                 class="hero">
-
-
-            <div class="container">
-
-
-                <div class="hero-badge">
-
-                    <span></span>
-
-                    Environmental Compliance SaaS for Highway & Road Projects
-
-                </div>
-
-
-
-                <h1>
-
-                    Automated Environmental
-
-                    <br>
-
-                    Compliance & Mitigation for
-
-                    <br>
-
-                    Highway Construction
-
-                </h1>
-
-
-
-                <p class="hero-description">
-
-                    Centralize, analyze, and automate environmental monitoring
-                    in real time.
-
-                    Prevent regulatory penalties and stop-work orders through
-                    continuous IoT telemetry for air, noise, water, and
-                    geo-referenced incident management on site.
-
-                </p>
-
-
-
-                <div class="hero-buttons">
-
-
-                    <a href="#solutions"
-                       class="btn btn-primary">
-
-                        Get Started →
-
-                    </a>
-
-
-                    <a href="#features"
-                       class="btn btn-outline">
-
-                        ▶ Watch Live Demo
-
-                    </a>
-
-
-                </div>
-
-
-
-                <div class="hero-image">
-
-
-                    <img
-                        src="assets/images/highway-hero.png"
-                        alt="Highway infrastructure project"
-                    >
-
-
-                    <div class="telemetry-bar">
-
-
-                        <span class="status-dot"></span>
-
-
-                        <strong>
-                            142 Active IoT Nodes
-                        </strong>
-
-
-                        <span>
-                            •
-                        </span>
-
-
-                        <span class="green-text">
-                            24ms Latency
-                        </span>
-
-
-                        <span>
-                            •
-                        </span>
-
-
-                        <span>
-                            96.2% Regulatory Compliance
-                        </span>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-
-        <!-- ==================================================
-             SOLUTIONS
-        =================================================== -->
-
-        <section id="solutions"
-                 class="section">
-
-
-            <div class="container">
-
-
-                <div class="section-header">
-
-
-                    <h2>
-
-                        Specialized Solutions for the Highway
-
-                        <br>
-
-                        Construction Sector
-
-                    </h2>
-
-
-                    <p>
-
-                        Comprehensive ecosystem engineered for road builders,
-                        concessionaires, and environmental consultants committed
-                        to operational excellence.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="solutions-grid">
-
-
-                    <!-- SOLUTION 1 -->
-
-                    <article class="solution-card">
-
-
-                        <div class="card-icon">
-                            🌬
-                        </div>
-
-
-                        <h3>
-                            Air Quality & Dust Control
-                        </h3>
-
-
-                        <p>
-
-                            Optical telemetry sensors for particulate matter
-                            PM10 / PM2.5 with automated alert triggering and
-                            instant misting activation on haul roads.
-
-                        </p>
-
-
-                        <div class="card-footer">
-
-                            ECA Air Standard
-
-                            <span>•</span>
-
-                            NIST Calibrated
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- SOLUTION 2 -->
-
-                    <article class="solution-card">
-
-
-                        <div class="card-icon">
-                            🎙
-                        </div>
-
-
-                        <h3>
-                            Acoustic Pressure & Noise Monitoring
-                        </h3>
-
-
-                        <p>
-
-                            Continuous sound level telemetry in decibels (dBA)
-                            across day/night shifts with geo-synchronized alerts.
-
-                        </p>
-
-
-                        <div class="card-footer">
-
-                            IEC 61672 Class 1
-
-                            <span>•</span>
-
-                            Digital dBA Log
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- SOLUTION 3 -->
-
-                    <article class="solution-card">
-
-
-                        <div class="card-icon">
-                            💧
-                        </div>
-
-
-                        <h3>
-                            Water Resources Supervision
-                        </h3>
-
-
-                        <p>
-
-                            Submersible multiparameter probes monitor streams,
-                            drainage outfalls, pH, turbidity, dissolved oxygen
-                            and environmental parameters.
-
-                        </p>
-
-
-                        <div class="card-footer">
-
-                            Clean Water Standard
-
-                            <span>•</span>
-
-                            Continuous Monitoring
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- SOLUTION 4 -->
-
-                    <article class="solution-card">
-
-
-                        <div class="card-icon">
-                            🌱
-                        </div>
-
-
-                        <h3>
-                            Wildlife & Sensitive Habitat Protection
-                        </h3>
-
-
-                        <p>
-
-                            Satellite-tracked biological crossings,
-                            automated geofencing of sensitive buffer zones
-                            and environmental event tracking.
-
-                        </p>
-
-
-                        <div class="card-footer">
-
-                            GIS Satellite Monitoring
-
-                            <span>•</span>
-
-                            Critical Habitat Alert
-
-                        </div>
-
-
-                    </article>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-
-        <!-- ==================================================
-             BENEFITS
-        =================================================== -->
-
-        <section id="benefits"
-                 class="section benefits-section">
-
-
-            <div class="container">
-
-
-                <div class="section-header">
-
-
-                    <div class="section-tag">
-                        BENEFITS
-                    </div>
-
-
-                    <h2>
-
-                        The EcoRoad Advantage: From Manual Logs
-
-                        <br>
-
-                        to Real-Time Telemetry
-
-                    </h2>
-
-
-                    <p>
-
-                        Ensure continuous project operations by minimizing
-                        administrative shutdown risks and maximizing field
-                        crew efficiency.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="benefits-grid">
-
-
-                    <!-- ========================================
-                         BENEFIT 1
-                    ========================================= -->
-
-                    <article class="benefit-card">
-
-
-                        <div class="benefit-image">
-
-
-                            <img
-                                src="assets/images/chica-monitoreo.png"
-                                alt="Environmental monitoring technician"
-                            >
-
-
-                            <span class="compliance">
-
-                                100% Compliance
-
-                            </span>
-
-
-                        </div>
-
-
-
-                        <div class="benefit-content">
-
-
-                            <h3>
-                                Zero Shutdowns & Fines
-                            </h3>
-
-
-                            <p>
-
-                                Instant, preventive detection of any deviation
-                                from Maximum Permissible Limits (MPL) and
-                                environmental standards, triggering corrective
-                                workflows before formal audit inspections.
-
-                            </p>
-
-
-                            <small>
-
-                                ✓ Immediate mitigation in under 15 minutes
-
-                            </small>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-
-
-                    <!-- ========================================
-                         BENEFIT 2
-                    ========================================= -->
-
-                    <article class="benefit-card">
-
-
-                        <div class="benefit-dark">
-
-
-                            <img
-                                src="assets/images/escudo.png"
-                                alt="Security icon"
-                                class="benefit-icon"
-                            >
-
-
-                            <small>
-
-                                SHA-256 CRYPTOGRAPHY
-
-                            </small>
-
-
-                            <strong>
-
-                                Tamper-Proof Technical Records
-
-                            </strong>
-
-
-                        </div>
-
-
-
-                        <div class="benefit-content">
-
-
-                            <h3>
-                                Automated Audits
-                            </h3>
-
-
-                            <p>
-
-                                Instant consolidation of field logs,
-                                instrument calibrations, and official
-                                compliance reports ready for regulatory
-                                bodies and transport authorities.
-
-                            </p>
-
-
-                            <small>
-
-                                ✓ Save up to 85 monthly office hours
-
-                            </small>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-
-
-                    <!-- ========================================
-                         BENEFIT 3
-                    ========================================= -->
-
-                    <article class="benefit-card">
-
-
-                        <div class="benefit-blue">
-
-
-                            <img
-                                src="assets/images/gps.png"
-                                alt="GPS georeferencing icon"
-                                class="benefit-icon"
-                            >
-
-
-                            <small>
-
-                                GPS RTK GEOREFERENCING
-
-                            </small>
-
-
-                            <strong>
-
-                                Total Chainage Traceability
-
-                            </strong>
-
-
-                        </div>
-
-
-
-                        <div class="benefit-content">
-
-
-                            <h3>
-
-                                Immediate Mitigation Workflow
-
-                            </h3>
-
-
-                            <p>
-
-                                Direct task assignment to field crews
-                                with mandatory geo-tagged photo capture
-                                and digitally signed closeout reports
-                                directly from the offline mobile app.
-
-                            </p>
-
-
-                            <small>
-
-                                ✓ Chain-of-custody tracking per road station (KP)
-
-                            </small>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-
-
-                    <!-- ========================================
-                         BENEFIT 4
-                    ========================================= -->
-
-                    <article class="benefit-card">
-
-
-                        <div class="benefit-image">
-
-
-                            <img
-                                src="assets/images/equipo-obra.png"
-                                alt="Road construction team"
-                            >
-
-
-                            <span class="expert-badge">
-
-                                24/7 Expert Backing
-
-                            </span>
-
-
-                        </div>
-
-
-
-                        <div class="benefit-content">
-
-
-                            <h3>
-
-                                Legal Peace of Mind & Expert Backing
-
-                            </h3>
-
-
-                            <p>
-
-                                Supported by a dedicated advisory board
-                                of environmental engineers and road
-                                infrastructure specialists, offering
-                                technical-legal guidance during inspections.
-
-                            </p>
-
-
-                            <small>
-
-                                ✓ Audit simulation and 24/7 expert review
-
-                            </small>
-
-
-                        </div>
-
-
-                    </article>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-
-        <!-- ==================================================
-             FEATURES
-        =================================================== -->
-
-        <section id="features"
-                 class="section features-section">
-
-
-            <div class="container">
-
-
-                <div class="section-header">
-
-
-                    <div class="section-tag">
-
-                        FEATURES
-
-                    </div>
-
-
-                    <h2>
-
-                        Advanced Management & Compliance
-
-                        <br>
-
-                        Technology
-
-                    </h2>
-
-
-                    <p>
-
-                        Cloud-native IoT architecture purpose-built for the
-                        topographic and climatic rigor of major civil
-                        engineering projects.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="features-layout">
-
-
-                    <!-- VIDEO / LIVE MONITORING -->
-
-                    <div class="video-demo">
-
-
-                        <div class="live-label">
-
-                            🔴 Live Stream: Highway Construction
-
-                        </div>
-
-
-                        <button class="play-button">
-
-                            ▶
-
-                        </button>
-
-
-                        <div class="video-status">
-
-
-                            <span>
-
-                                Connectivity: LoRaWAN + 4G/LTE
-
-                            </span>
-
-
-                            <span>
-
-                                API RESTful v2.4 Active
-
-                            </span>
-
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- FEATURE LIST -->
-
-                    <div class="feature-list">
-
-
-
-                        <article class="feature-item">
-
-
-                            <button class="feature-title">
-
-                                Multi-Project GIS Georeferenced Dashboards
-
-                                <span>⌃</span>
-
-                            </button>
-
-
-                            <div class="feature-content">
-
-                                Oversee multiple road concession contracts
-                                in an interactive satellite map interface.
-                                View active work fronts and critical points
-                                in real time with automated color-coded
-                                thresholds.
-
-                            </div>
-
-
-                        </article>
-
-
-
-                        <article class="feature-item">
-
-
-                            <button class="feature-title">
-
-                                Automated Regulatory Alert Engine (MPL / ECA)
-
-                                <span>⌃</span>
-
-                            </button>
-
-
-                            <div class="feature-content">
-
-                                Predictive algorithms evaluating hourly trends
-                                and triggering instant notifications whenever
-                                environmental parameters approach regulatory
-                                thresholds.
-
-                            </div>
-
-
-                        </article>
-
-
-
-                        <article class="feature-item">
-
-
-                            <button class="feature-title">
-
-                                Evidence Traceability & Chain of Custody
-
-                                <span>⌃</span>
-
-                            </button>
-
-
-                            <div class="feature-content">
-
-                                Immutable storage with trusted timestamping.
-                                Every telemetry reading, geo-tagged photo and
-                                laboratory certificate is associated with
-                                forensic metadata.
-
-                            </div>
-
-
-                        </article>
-
-
-
-                        <article class="feature-item">
-
-
-                            <button class="feature-title">
-
-                                Official Report Generation in PDF/A & GeoJSON
-
-                                <span>⌃</span>
-
-                            </button>
-
-
-                            <div class="feature-content">
-
-                                One-click export of environmental compliance
-                                dossiers formatted for official reporting
-                                and environmental management documentation.
-
-                            </div>
-
-
-                        </article>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-
-        <!-- ==================================================
-             TESTIMONIALS
-        =================================================== -->
-
-        <section id="testimonials"
-                 class="section">
-
-
-            <div class="container">
-
-
-                <div class="section-header">
-
-
-                    <h2>
-
-                        What Infrastructure Leaders Say About Us
-
-                    </h2>
-
-
-                    <p>
-
-                        Proven success across highways, logistics corridors
-                        and complex civil works.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="testimonials-grid">
-
-
-                    <!-- TESTIMONIAL 1 -->
-
-                    <article class="testimonial">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            “EcoRoad reduced our report preparation time for
-                            environmental authorities and made project information
-                            easier to manage.”
-
-                        </p>
-
-
-                        <div class="testimonial-user">
-
-
-                            RM
-
-
-                            <strong>
-
-                                Eng. Roberto Morales
-
-                            </strong>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- TESTIMONIAL 2 -->
-
-                    <article class="testimonial">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            “The automated alert engine allowed us to identify
-                            environmental risks much faster during field operations.”
-
-                        </p>
-
-
-                        <div class="testimonial-user">
-
-
-                            MS
-
-
-                            <strong>
-
-                                Dra. Mariana Silva
-
-                            </strong>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- TESTIMONIAL 3 -->
-
-                    <article class="testimonial">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            “Real-time environmental sensor integration gives
-                            our project team better visibility over field conditions.”
-
-                        </p>
-
-
-                        <div class="testimonial-user">
-
-
-                            CD
-
-
-                            <strong>
-
-                                Arch. Carlos Duarte
-
-                            </strong>
-
-
-                        </div>
-
-
-                    </article>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-
-        <!-- ==================================================
-             PRICING
-        =================================================== -->
-
-        <section id="pricing"
-                 class="section pricing-section">
-
-
-            <div class="container">
-
-
-                <div class="section-header">
-
-
-                    <div class="section-tag">
-
-                        PRICING
-
-                    </div>
-
-
-                    <h2>
-
-                        Flexible, Scalable Subscription Plans
-
-                    </h2>
-
-
-                    <p>
-
-                        Select the SaaS tier tailored to your highway consortium
-                        or environmental consultancy.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <div class="billing-switch">
-
-
-                    <button class="billing active">
-
-                        Monthly Billing
-
-                    </button>
-
-
-                    <button class="billing">
-
-                        Annual (2 months free)
-
-                    </button>
-
-
-                </div>
-
-
-
-                <div class="pricing-grid">
-
-
-                    <!-- BASE PLAN -->
-
-                    <article class="price-card">
-
-
-                        <small>
-
-                            FOR SMALL ROAD CONTRACTORS
-
-                        </small>
-
-
-                        <h3>
-
-                            Base Plan
-
-                        </h3>
-
-
-                        <p>
-
-                            Ideal for routine maintenance projects or
-                            short highway stretches requiring standard monitoring.
-
-                        </p>
-
-
-                        <div class="price">
-
-                            $490
-
-                            <span>/mo</span>
-
-                        </div>
-
-
-                        <button class="plan-button">
-
-                            Select Base Plan
-
-                        </button>
-
-
-                        <h4>
-
-                            INCLUDED FEATURES:
-
-                        </h4>
-
-
-                        <ul>
-
-                            <li>
-                                ✓ Up to 3 active road projects
-                            </li>
-
-                            <li>
-                                ✓ Standard georeferenced dashboards
-                            </li>
-
-                            <li>
-                                ✓ PM10 and Noise (dBA) logging
-                            </li>
-
-                            <li>
-                                ✓ Automated email alerts
-                            </li>
-
-                            <li>
-                                ✓ Standard business hours support
-                            </li>
-
-                        </ul>
-
-
-                    </article>
-
-
-
-
-
-                    <!-- PROFESSIONAL PLAN -->
-
-                    <article class="price-card featured-plan">
-
-
-                        <div class="popular">
-
-                            MOST POPULAR
-
-                        </div>
-
-
-                        <small>
-
-                            FOR ENVIRONMENTAL CONSULTANTS & CONCESSIONAIRES
-
-                        </small>
-
-
-                        <h3>
-
-                            Professional Plan
-
-                        </h3>
-
-
-                        <p>
-
-                            For highway supervision and concessionaire firms
-                            demanding full scalability and multi-user management.
-
-                        </p>
-
-
-                        <div class="price">
-
-                            $1,290
-
-                            <span>/mo</span>
-
-                        </div>
-
-
-                        <button class="plan-button professional">
-
-                            Get Professional Plan
-
-                        </button>
-
-
-                        <h4>
-
-                            EVERYTHING IN BASE PLUS:
-
-                        </h4>
-
-
-                        <ul>
-
-                            <li>
-                                ✓ Unlimited road projects
-                            </li>
-
-                            <li>
-                                ✓ Complete water telemetry
-                            </li>
-
-                            <li>
-                                ✓ Field mitigation workflow
-                            </li>
-
-                            <li>
-                                ✓ Instant alerts to field crews
-                            </li>
-
-                            <li>
-                                ✓ PDF/A reports with digital signature
-                            </li>
-
-                        </ul>
-
-
-                    </article>
-
-
-
-
-
-                    <!-- ENTERPRISE PLAN -->
-
-                    <article class="price-card">
-
-
-                        <small>
-
-                            FOR MAJOR HIGHWAY CONSORTIUMS
-
-                        </small>
-
-
-                        <h3>
-
-                            Enterprise Plan
-
-                        </h3>
-
-
-                        <p>
-
-                            For national-scale infrastructure consortia with
-                            custom integration and dedicated audit requirements.
-
-                        </p>
-
-
-                        <div class="price">
-
-                            $2,850
-
-                            <span>/mo</span>
-
-                        </div>
-
-
-                        <button class="plan-button enterprise">
-
-                            Contact Sales
-
-                        </button>
-
-
-                        <h4>
-
-                            EVERYTHING IN PROFESSIONAL PLUS:
-
-                        </h4>
-
-
-                        <ul>
-
-                            <li>
-                                ✓ Full RESTful API
-                            </li>
-
-                            <li>
-                                ✓ Custom institutional deployment
-                            </li>
-
-                            <li>
-                                ✓ Priority technical support
-                            </li>
-
-                            <li>
-                                ✓ Unlimited telemetry projects
-                            </li>
-
-                            <li>
-                                ✓ Environmental audit support
-                            </li>
-
-                        </ul>
-
-
-                    </article>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-
-<!-- ==================================================
-     TEAM
-=================================================== -->
-
-<section id="team"
-         class="section team-section">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <h2>
-                Our Team
-            </h2>
-
-            <p>
-                Meet the multidisciplinary team behind EcoRoad's
-                environmental telemetry platform.
-            </p>
-
+<body class="bg-paper font-sans text-slate-600 antialiased">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-paper/90 backdrop-blur">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6" aria-label="Main">
+      <a href="#home" class="flex shrink-0 items-center gap-2">
+        <!-- Reemplaza por tu logo -->
+        <span class="grid h-9 w-9 place-items-center rounded-full bg-pine-50 text-pine-700">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18c4-1 6-4 8-8s4-5 8-6"/><path d="M12 10c-3 0-5-1.500-6-4 3-.500 5 .500 6 4Z"/></svg>
+        </span>
+        <span class="text-lg font-extrabold tracking-tight text-pine-900">Eco<span class="text-pine-600">Road</span></span>
+      </a>
+
+      <ul id="nav-links" class="hidden items-center gap-3 text-xs font-medium text-slate-700 lg:flex xl:gap-6 xl:text-[13px]">
+        <li><a class="transition-colors hover:text-pine-600" href="#home">Home</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#solutions">Solutions</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#features">Features</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#benefits">Benefits</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#testimonials">Testimonials</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#pricing">Pricing</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#about">About Us</a></li>
+        <li><a class="transition-colors hover:text-pine-600" href="#team">About Team</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href="#" class="hidden text-[13px] font-semibold text-slate-800 transition-colors hover:text-pine-600 sm:inline">Sign In</a>
+        <!-- Selector de idioma: solo cambia el estado visual; conecta aquí tu lógica de traducción -->
+        <div class="flex rounded-md bg-slate-200/70 p-0.5 text-[10px] font-bold" role="group" aria-label="Language">
+          <button type="button" data-lang="es" class="lang-btn rounded px-1.5 py-1 text-slate-600 transition">ES</button>
+          <button type="button" data-lang="en" class="lang-btn rounded bg-pine-600 px-1.5 py-1 text-white transition">EN</button>
         </div>
+        <button id="menu-btn" type="button" class="grid h-10 w-10 place-items-center rounded-lg text-pine-900 transition hover:bg-pine-50 lg:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+          <svg id="icon-open" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="icon-close" viewBox="0 0 24 24" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </nav>
 
-
-        <div class="team-grid">
-
-
-            <!-- PERSON 1 -->
-
-            <article class="team-card">
-
-                <div class="avatar">
-
-                    <img
-                        src="assets/images/Andy.png"
-                        alt="EcoRoad team member"
-                    >
-
-                </div>
-
-                <h3>
-                    Software Engineer
-                </h3>
-
-                <p>
-                    Software Engineering student focused on web
-                    technologies, project collaboration and scalable
-                    digital solutions.
-                </p>
-
-            </article>
-
-
-
-            <!-- PERSON 2 -->
-
-            <article class="team-card">
-
-                <div class="avatar">
-
-                    <img
-                        src="assets/images/Eduardo.png"
-                        alt="EcoRoad team member"
-                    >
-
-                </div>
-
-                <h3>
-                    Software Engineer
-                </h3>
-
-                <p>
-                    Developer focused on efficient and scalable
-                    applications using modern programming technologies.
-                </p>
-
-            </article>
-
-
-
-            <!-- PERSON 3 -->
-
-            <article class="team-card">
-
-                <div class="avatar">
-
-                    <img
-                        src="assets/images/Cristina.jpeg"
-                        alt="EcoRoad team member"
-                    >
-
-                </div>
-
-                <h3>
-                    Software Engineer
-                </h3>
-
-                <p>
-                    Team member focused on project management,
-                    development and implementation of digital solutions.
-                </p>
-
-            </article>
-
-
-
-            <!-- PERSON 4 -->
-
-            <article class="team-card">
-
-                <div class="avatar">
-
-                    <img
-                        src="assets/images/Alisee.png"
-                        alt="EcoRoad team member"
-                    >
-
-                </div>
-
-                <h3>
-                    Software Engineering
-                </h3>
-
-                <p>
-                    Developer interested in web and mobile development,
-                    software architecture and innovation.
-                </p>
-
-            </article>
-
-
-
-            <!-- PERSON 5 -->
-
-            <article class="team-card">
-
-                <div class="avatar">
-
-                    <img
-                        src="assets/images/Miguel.png"
-                        alt="EcoRoad team member"
-                    >
-
-                </div>
-
-                <h3>
-                    Software Engineering
-                </h3>
-
-                <p>
-                    Software Engineering student committed to
-                    collaboration, personal growth and digital
-                    product development.
-                </p>
-
-            </article>
-
-
-        </div>
-
+    <div id="mobile-menu" class="lg:hidden">
+      <ul class="grid gap-1 border-t border-slate-200 px-4 py-4 text-sm font-medium text-slate-800 sm:grid-cols-2">
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#home">Home</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#solutions">Solutions</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#features">Features</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#benefits">Benefits</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#testimonials">Testimonials</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#pricing">Pricing</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#about">About Us</a></li>
+        <li><a class="block rounded-lg px-3 py-2.5 hover:bg-pine-50" href="#team">About Team</a></li>
+        <li class="sm:col-span-2 sm:hidden"><a class="block rounded-lg px-3 py-2.5 font-semibold text-pine-700 hover:bg-pine-50" href="#">Sign In</a></li>
+      </ul>
     </div>
+  </header>
 
-</section>
-<!-- ==================================================
-     CONTACT / CTA
-=================================================== -->
+  <main>
+    <!-- ================= HERO ================= -->
+    <section id="home" class="mx-auto max-w-5xl px-4 pb-14 pt-12 text-center sm:px-6 sm:pt-16">
+      <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-tight text-pine-900 sm:text-5xl lg:text-[56px]">
+        Automated Environmental Compliance &amp; Mitigation for Highway Construction
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-700 sm:text-lg">
+        Centralize, analyze, and automate environmental monitoring in real time. Prevent regulatory penalties and stop-work orders through continuous IoT telemetry for air, noise, water, and geo-referenced incident management on site.
+      </p>
+      <a href="#pricing" class="group mt-8 inline-flex items-center gap-2 rounded-lg bg-pine-900 px-6 py-3 text-sm font-semibold text-white shadow-lift transition hover:-translate-y-0.5 hover:bg-pine-700">
+        Get Started
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
 
-<section id="contact" class="contact-section">
+      <!-- Imagen del hero: vista aérea de la carretera -->
+      <div class="reveal relative mt-8 overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(17,24,39,.22)]">
+        <div class="ph aspect-[4/3] sm:aspect-[16/9]" role="img" aria-label="Aerial view of a highway under construction between forested mountains"></div>
+        <div class="absolute inset-x-3 bottom-3 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg bg-night/90 px-4 py-2.5 text-left text-[11px] font-medium text-white backdrop-blur sm:inset-x-auto sm:bottom-5 sm:left-5 sm:text-xs">
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-pine-400"></span><strong class="font-semibold">142 Active IoT Nodes</strong></span>
+          <span class="text-white/40">·</span>
+          <span class="text-pine-400">24ms Latency</span>
+          <span class="text-white/40">·</span>
+          <span>96.2% Regulatory Compliance</span>
+        </div>
+      </div>
+    </section>
 
-    <div class="container">
+    <!-- ================= SOLUTIONS ================= -->
+    <section id="solutions" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">Solutions</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-pine-900 sm:text-[32px]">Specialized Solutions for the Highway Construction Sector</h2>
+          <span class="mx-auto mt-4 block h-1 w-12 rounded-full bg-pine-700"></span>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Comprehensive ecosystem engineered for road builders, concessionaires, and environmental consultants committed to operational excellence.</p>
+        </div>
 
-        <div class="cta">
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <article class="reveal rounded-2xl bg-pine-50 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-7">
+            <span class="grid h-11 w-11 place-items-center rounded-lg border border-slate-200 bg-white text-pine-900"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.500 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+            <h3 class="mt-6 text-lg font-bold text-pine-900">Air Quality &amp; Dust Control</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">Optical telemetry sensors for particulate matter PM10 / PM2.5 with automated alert triggering and instant misting activation on haul roads.</p>
+            <p class="mt-5 border-t border-slate-200/80 pt-4 text-[11px] font-semibold text-slate-800">ECA Air Standard <span class="mx-1.5">•</span> <span class="text-pine-600">NIST Calibrated</span></p>
+          </article>
 
-            <h2>
-                Transform the Sustainability & Environmental
-                <br>
-                Compliance of Your Road Infrastructure.
-            </h2>
+          <article class="reveal rounded-2xl bg-pine-50 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-7">
+            <span class="grid h-11 w-11 place-items-center rounded-lg border border-slate-200 bg-white text-pine-900"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span>
+            <h3 class="mt-6 text-lg font-bold text-pine-900">Acoustic Pressure &amp; Noise Monitoring</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">Continuous sound level meter telemetry in decibels (dBA) across day/night shifts with geo-synchronized alerts in rock drilling and blasting zones.</p>
+            <p class="mt-5 border-t border-slate-200/80 pt-4 text-[11px] font-semibold text-slate-800">IEC 61672 Class 1 Standard <span class="mx-1.5">•</span> <span class="text-pine-600">Digital dBA Log</span></p>
+          </article>
 
-            <p>
-                Request a personalized 20-minute session with our road telemetry
-                engineers and discover how to eliminate non-compliance risks.
-            </p>
+          <article class="reveal rounded-2xl bg-pine-50 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-7">
+            <span class="grid h-11 w-11 place-items-center rounded-lg border border-slate-200 bg-white text-pine-900"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.500v9L12 21l-8-4.500v-9L12 3Z"/><path d="M4 7.500 12 12l8-4.500M12 12v9"/></svg></span>
+            <h3 class="mt-6 text-lg font-bold text-pine-900">Water Resources Supervision</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">Submersible multiparameter probes in stream crossings, river diversions, and drainage outfalls with real-time telemetry for pH, turbidity (NTU), dissolved oxygen, and hydrocarbon traces.</p>
+            <p class="mt-5 border-t border-slate-200/80 pt-4 text-[11px] font-semibold text-slate-800">Clean Water Standard <span class="mx-1.5">•</span> <span class="text-pine-600">Continuous Monitoring</span></p>
+          </article>
 
-            <div class="cta-buttons">
+          <article class="reveal rounded-2xl bg-pine-50 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-7">
+            <span class="grid h-11 w-11 place-items-center rounded-lg border border-slate-200 bg-white text-pine-900"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.300-4.500-2-8-2v14c3.500 0 6 .700 8 2 2-1.300 4.500-2 8-2V4c-3.500 0-6 .700-8 2ZM12 6v14"/></svg></span>
+            <h3 class="mt-6 text-lg font-bold text-pine-900">Ground Vibration Monitoring</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">Ground-vibration sensors track the peak vibration level generated by heavy machinery and compaction works, with instant alerts when configured limits are exceeded.</p>
+            <p class="mt-5 border-t border-slate-200/80 pt-4 text-[11px] font-semibold text-slate-800">Configurable Thresholds <span class="mx-1.5">•</span> <span class="text-pine-600">24/7 Logging</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-                <a href="#contact" class="btn btn-light">
-                    Request Guided Demo
-                </a>
+    <!-- ================= BENEFITS ================= -->
+    <section id="benefits" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">Benefits</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-[32px]">The EcoRoad Advantage: From Manual Logs to Real-Time Telemetry</h2>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Ensure continuous project operations by minimizing administrative shutdown risks and maximizing field crew efficiency.</p>
+        </div>
 
-                <a href="#contact" class="btn btn-transparent">
-                    Speak with a Specialist
-                </a>
+        <div class="mt-10 grid gap-6 md:grid-cols-2">
+          <!-- 1 -->
+          <article class="reveal overflow-hidden rounded-xl bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="relative">
+              <div class="ph ph-site aspect-[2/1]" role="img" aria-label="Technician checking a monitoring station next to a river"></div>
+              <span class="absolute right-3 top-3 rounded bg-pine-600 px-2 py-1 text-[10px] font-semibold text-white">100% Compliance</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-navy">Zero Shutdowns &amp; Fines</h3>
+              <p class="mt-2 text-[13px] leading-relaxed">Instant, preventive detection of any deviation from Maximum Permissible Limits (MPL) and environmental standards, triggering corrective workflows before formal audit inspections.</p>
+              <p class="mt-4 flex items-center gap-2 text-[11px] font-semibold text-pine-900"><svg viewBox="0 0 24 24" class="h-4 w-4 text-pine-500" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.200 14.200-3.500-3.500 1.400-1.400 2.100 2.100 4.500-4.500 1.400 1.400-5.900 5.900Z"/></svg>Immediate mitigation in under 15 minutes</p>
+            </div>
+          </article>
 
+          <!-- 2 -->
+          <article class="reveal overflow-hidden rounded-xl bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="panel-green grid aspect-[2/1] place-items-center text-center text-white">
+              <div>
+                <span class="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-white/10 text-pine-400 ring-1 ring-white/15"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                <p class="mt-4 text-[10px] font-bold uppercase tracking-widest text-pine-400">SHA-256 Cryptography</p>
+                <p class="mt-1 text-base font-semibold">Tamper-Proof Technical Records</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-navy">Automated Audits</h3>
+              <p class="mt-2 text-[13px] leading-relaxed">Instant consolidation of field logs, instrument calibrations, and official compliance reports ready for regulatory bodies and transport authorities.</p>
+              <p class="mt-4 flex items-center gap-2 text-[11px] font-semibold text-pine-900"><svg viewBox="0 0 24 24" class="h-4 w-4 text-pine-500" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.200 14.200-3.500-3.500 1.400-1.400 2.100 2.100 4.500-4.500 1.400 1.400-5.900 5.900Z"/></svg>Save up to 85 monthly office hours</p>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="reveal overflow-hidden rounded-xl bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="panel-night grid aspect-[2/1] place-items-center text-center text-white">
+              <div>
+                <span class="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-pine-500/15 text-pine-400 ring-1 ring-pine-400/25"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.200 7-11a7 7 0 1 0-14 0c0 4.800 7 11 7 11Z"/><circle cx="12" cy="10" r="2.500"/></svg></span>
+                <p class="mt-4 text-[10px] font-bold uppercase tracking-widest text-pine-400">GPS RTK Georeferencing</p>
+                <p class="mt-1 text-base font-semibold">Total Chainage Traceability</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-navy">Immediate Mitigation Workflow</h3>
+              <p class="mt-2 text-[13px] leading-relaxed">Direct task assignment to field crews with mandatory geo-tagged photo capture and digitally signed closeout reports directly from the offline mobile app.</p>
+              <p class="mt-4 flex items-center gap-2 text-[11px] font-semibold text-pine-900"><svg viewBox="0 0 24 24" class="h-4 w-4 text-pine-500" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.200 14.200-3.500-3.500 1.400-1.400 2.100 2.100 4.500-4.500 1.400 1.400-5.900 5.900Z"/></svg>Chain-of-custody tracking per road station (KP)</p>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="reveal overflow-hidden rounded-xl bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="relative">
+              <div class="ph ph-site aspect-[2/1]" role="img" aria-label="Engineers and inspectors meeting on a construction site"></div>
+              <span class="absolute bottom-3 left-3 rounded bg-white px-2 py-1 text-[10px] font-semibold text-navy shadow">24/7 Expert Backing</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-navy">Legal Peace of Mind &amp; Expert Backing</h3>
+              <p class="mt-2 text-[13px] leading-relaxed">Supported by a dedicated advisory board of environmental engineers and road infrastructure specialists, offering technical-legal guidance during inspections.</p>
+              <p class="mt-4 flex items-center gap-2 text-[11px] font-semibold text-pine-900"><svg viewBox="0 0 24 24" class="h-4 w-4 text-pine-500" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.200 14.200-3.500-3.500 1.400-1.400 2.100 2.100 4.500-4.500 1.400 1.400-5.900 5.900Z"/></svg>Audit simulation and 24/7 expert review</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT US / FEATURES ================= -->
+    <section id="about" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">About Us</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-[32px]">Advanced Management &amp; Compliance Technology</h2>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Cloud-native IoT architecture purpose-built for the topographic and climatic rigor of major civil engineering projects.</p>
+        </div>
+
+        <div class="mt-10 grid items-center gap-8 lg:grid-cols-2">
+          <!-- Video: reemplaza el href por tu enlace o incrusta un <iframe> -->
+          <a href="#" class="reveal group block rounded-2xl bg-[#E9D9B4] p-2 shadow-[0_14px_40px_rgba(221,169,75,.35)] transition hover:-translate-y-1" aria-label="Play the EcoRoad overview video">
+            <div class="relative overflow-hidden rounded-xl">
+              <div class="ph aspect-video"></div>
+              <span class="absolute left-1/2 top-1/2 grid h-11 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-xl bg-red-600 text-white shadow-lg transition group-hover:scale-110">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
+              </span>
+              <span class="absolute inset-x-0 bottom-0 bg-night/90 px-3 py-1.5 text-[10px] text-white/90">About EcoRoad Solution</span>
+            </div>
+          </a>
+
+          <div id="features" class="space-y-4 scroll-mt-24">
+            <div class="acc-item open reveal rounded-xl border border-slate-200 bg-white shadow-card">
+              <button type="button" class="acc-btn flex w-full items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="true">
+                <span class="text-[15px] font-bold text-pine-900">Multi-Project GIS Georeferenced Dashboards</span>
+                <svg viewBox="0 0 24 24" class="chev h-4 w-4 shrink-0 text-pine-900" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="acc-panel"><div><p class="px-5 pb-5 text-[13px] leading-relaxed">Oversee multiple road concession contracts in an interactive satellite map interface (Shapefiles / GeoJSON). View active work fronts and critical points in real time with automated color-coded thresholds.</p></div></div>
             </div>
 
-        </div>
-
-    </div>
-
-</section>
-<footer class="footer">
-
-    <div class="container footer-grid">
-
-        <!-- ECOROAD -->
-        <div class="footer-brand">
-
-            <div class="footer-logo">
-                <span class="footer-logo-icon">🌿</span>
-
-                <h2>
-                    Eco<span>Road</span>
-                </h2>
+            <div class="acc-item open reveal rounded-xl border border-slate-200 bg-white shadow-card">
+              <button type="button" class="acc-btn flex w-full items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="true">
+                <span class="text-[15px] font-bold text-pine-900">Automated Regulatory Alert Engine (MPL / ECA)</span>
+                <svg viewBox="0 0 24 24" class="chev h-4 w-4 shrink-0 text-pine-900" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="acc-panel"><div><p class="px-5 pb-5 text-[13px] leading-relaxed">Predictive algorithms evaluating hourly trends and triggering instant notifications via SMS, enterprise WhatsApp, and email to section supervisors whenever environmental parameters reach 85% of regulatory thresholds.</p></div></div>
             </div>
 
-            <p>
-                EcoRoad is the SaaS platform specialized in environmental
-                compliance and telemetry mitigation for highways and road
-                concessions.
-            </p>
+            <div class="acc-item open reveal rounded-xl border border-slate-200 bg-white shadow-card">
+              <button type="button" class="acc-btn flex w-full items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="true">
+                <span class="text-[15px] font-bold text-pine-900">Evidence Traceability &amp; Chain of Custody</span>
+                <svg viewBox="0 0 24 24" class="chev h-4 w-4 shrink-0 text-pine-900" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="acc-panel"><div><p class="px-5 pb-5 text-[13px] leading-relaxed">Immutable vault storage with RFC 3161-compliant trusted timestamping. Every telemetry reading, geo-tagged photo, and laboratory certificate is anchored with forensic metadata (UTM WGS84 coordinates, altitude, inspector, and cryptographic signature).</p></div></div>
+            </div>
 
-            <em>
-                “Infrastructure today, a better environment”
-            </em>
+            <div class="acc-item open reveal rounded-xl border border-slate-200 bg-white shadow-card">
+              <button type="button" class="acc-btn flex w-full items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="true">
+                <span class="text-[15px] font-bold text-pine-900">Official Report Generation in PDF/A &amp; GeoJSON</span>
+                <svg viewBox="0 0 24 24" class="chev h-4 w-4 shrink-0 text-pine-900" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="acc-panel"><div><p class="px-5 pb-5 text-[13px] leading-relaxed">One-click export of monthly environmental compliance dossiers, pre-formatted to match highway environmental management plans (EMP) and official transportation ministry terms of reference.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="testimonials" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">Testimonials</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-pine-900 sm:text-[32px]">What Infrastructure Leaders Say About Us</h2>
+          <span class="mx-auto mt-4 block h-1 w-12 rounded-full bg-pine-700"></span>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Proven success across national highways, logistics corridors, and complex civil works.</p>
         </div>
 
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <figure class="reveal flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-card transition duration-300 hover:-translate-y-1">
+            <div class="text-sm tracking-widest text-gold" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-3 flex-1 text-[13px] italic leading-relaxed text-slate-700">"EcoRoad reduced our report preparation time for environmental authorities on the Andes Highway by 80%. Our data is always clean and audit-ready."</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-4">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-pine-50 text-[11px] font-bold text-pine-700">RM</span>
+              <span><span class="block text-[13px] font-bold text-navy">Eng. Roberto Morales</span><span class="block text-[11px] text-slate-500">Environmental Director · Andes Road Consortium</span></span>
+            </figcaption>
+          </figure>
 
-        <!-- MODULES -->
-        <div class="footer-column">
+          <figure class="reveal flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-card transition duration-300 hover:-translate-y-1">
+            <div class="text-sm tracking-widest text-gold" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-3 flex-1 text-[13px] italic leading-relaxed text-slate-700">"The automated alert engine allowed us to mitigate a critical noise spike in less than 20 minutes, avoiding a formal stop-work order."</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-4">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-pine-50 text-[11px] font-bold text-pine-700">MS</span>
+              <span><span class="block text-[13px] font-bold text-navy">Dra. Mariana Silva</span><span class="block text-[11px] text-slate-500">Senior Environmental Consultant · InfraTech</span></span>
+            </figcaption>
+          </figure>
 
-            <h4>MODULES</h4>
+          <figure class="reveal flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-card transition duration-300 hover:-translate-y-1">
+            <div class="text-sm tracking-widest text-gold" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-3 flex-1 text-[13px] italic leading-relaxed text-slate-700">"Real-time integration with turbidity sensors and cryptographic timestamping gives our legal team bulletproof confidence."</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-4">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-pine-50 text-[11px] font-bold text-pine-700">CD</span>
+              <span><span class="block text-[13px] font-bold text-navy">Arch. Carlos Duarte</span><span class="block text-[11px] text-slate-500">Highway Construction Supervisor · O&amp;M Concessions</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-            <p>Air Telemetry (PM10/PM2.5)</p>
-            <p>Noise Monitoring (dBA)</p>
-            <p>Water Quality (pH/NTU)</p>
-            <p>Wildlife Protection</p>
+    <!-- ================= PRICING ================= -->
+    <section id="pricing" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">Pricing</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-[32px]">Flexible, Scalable Subscription Plans</h2>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Select the SaaS tier tailored to your highway consortium or environmental consultancy.</p>
 
+          <div class="mt-6 inline-flex rounded-lg bg-slate-200/70 p-1 text-xs font-semibold" role="group" aria-label="Billing period">
+            <button type="button" data-billing="monthly" class="bill-btn rounded-md bg-pine-900 px-4 py-2 text-white transition">Monthly Billing</button>
+            <button type="button" data-billing="annual" class="bill-btn rounded-md px-4 py-2 text-slate-700 transition">Annual <span class="font-medium opacity-80">(2 months free)</span></button>
+          </div>
         </div>
 
+        <div class="mt-12 grid items-start gap-6 lg:grid-cols-3">
+          <!-- Starter -->
+          <article class="reveal rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">For small road contractors</p>
+            <h3 class="mt-2 text-xl font-extrabold text-pine-900">Starter Plan</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">Ideal for routine maintenance projects or short highway stretches requiring standard monitoring.</p>
+            <p class="mt-5 text-4xl font-extrabold tracking-tight text-navy"><span class="price" data-monthly="S/490" data-annual="S/4,900">S/490</span><span class="period text-xs font-medium text-slate-500"> / mo</span></p>
+            <a href="#contact" class="mt-6 block rounded-lg bg-slate-100 px-5 py-3 text-center text-[13px] font-bold text-navy transition hover:bg-slate-200">Select Base Plan</a>
+            <p class="mt-7 text-[10px] font-bold uppercase tracking-wider text-navy">Included features:</p>
+            <ul class="mt-3 space-y-2.5 text-[13px]">
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Up to 3 active road projects simultaneously</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Standard georeferenced dashboards</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>PM10 and Noise (dBA) logging</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Automated email alerts</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Standard business hours support (48h SLA)</li>
+            </ul>
+          </article>
 
-        <!-- REGULATORY FRAMEWORK -->
-        <div class="footer-column">
+          <!-- Professional (destacado) -->
+          <article class="reveal relative rounded-2xl bg-pine-800 p-7 text-white shadow-[0_24px_50px_rgba(15,74,46,.35)] ring-1 ring-pine-500/40 transition duration-300 hover:-translate-y-1 lg:-mt-4">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-pine-500 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Most popular</span>
+            <p class="text-[10px] font-bold uppercase tracking-wider text-pine-400">For environmental consultants &amp; concessionaires</p>
+            <h3 class="mt-2 text-xl font-extrabold">Professional Plan</h3>
+            <p class="mt-2 text-[13px] leading-relaxed text-white/80">For highway supervision and concessionaire firms demanding full scalability and multi-user management.</p>
+            <p class="mt-5 text-4xl font-extrabold tracking-tight"><span class="price" data-monthly="S/1,290" data-annual="S/12,900">S/1,290</span><span class="period text-xs font-medium text-white/60"> / mo</span></p>
+            <a href="#contact" class="mt-6 block rounded-lg bg-pine-500 px-5 py-3 text-center text-[13px] font-bold text-white transition hover:-translate-y-0.5 hover:bg-pine-400 hover:shadow-lg">Get Professional Plan</a>
+            <p class="mt-7 text-[10px] font-bold uppercase tracking-wider text-pine-400">Everything in Base plus:</p>
+            <ul class="mt-3 space-y-2.5 text-[13px] text-white/90">
+              <li class="flex gap-2"><span class="font-bold text-pine-400">✓</span>Unlimited road projects on platform</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-400">✓</span>Complete water telemetry (pH, NTU, TPH)</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-400">✓</span>Field mitigation workflow with offline mobile app</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-400">✓</span>Instant WhatsApp alerts to field crews</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-400">✓</span>PDF/A reports with cryptographic digital signature</li>
+            </ul>
+          </article>
 
-            <h4>REGULATORY FRAMEWORK</h4>
+          <!-- Enterprise -->
+          <article class="reveal rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">For major highway consortiums</p>
+            <h3 class="mt-2 text-xl font-extrabold text-pine-900">Enterprise Plan</h3>
+            <p class="mt-2 text-[13px] leading-relaxed">For national-scale infrastructure consortia with custom integration, white-label, and dedicated audit requirements.</p>
+            <p class="mt-5 text-4xl font-extrabold tracking-tight text-navy"><span class="price" data-monthly="S/2,850" data-annual="S/28,500">S/2,850</span><span class="period text-xs font-medium text-slate-500"> / mo</span></p>
+            <a href="#contact" class="mt-6 block rounded-lg bg-pine-900 px-5 py-3 text-center text-[13px] font-bold text-white transition hover:-translate-y-0.5 hover:bg-pine-700 hover:shadow-lg">Contact Sales</a>
+            <p class="mt-7 text-[10px] font-bold uppercase tracking-wider text-navy">Everything in Professional plus:</p>
+            <ul class="mt-3 space-y-2.5 text-[13px]">
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Full RESTful API, SCADA &amp; ArcGIS integration</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Custom institutional white-label deployment</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Priority 24/7 technical and legal support with dedicated geotechnical advisory</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>Unlimited telemetry projects and nodes</li>
+              <li class="flex gap-2"><span class="font-bold text-pine-600">✓</span>On-site legal and expert defense during direct environmental audits</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-            <p>ISO 14001:2015 Certification</p>
-            <p>Highway Environmental Directives</p>
-            <p>Environmental Standards Compliance</p>
-            <p>SHA-256 Cryptographic Vault</p>
-
+    <!-- ================= ABOUT TEAM ================= -->
+    <section id="team" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <span class="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">About Team</span>
+          <h2 class="mx-auto mt-4 max-w-xl text-2xl font-extrabold leading-tight tracking-tight text-navy sm:text-[32px]">Driving Innovation and Sustainability in Highway Infrastructure</h2>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">A multidisciplinary engineering team purpose-built to automate environmental compliance in major civil works.</p>
         </div>
 
+        <div class="mt-10 grid items-center gap-8 lg:grid-cols-2">
+          <!-- Video del equipo: reemplaza el href por tu enlace o incrusta un <iframe> -->
+          <a href="#" class="reveal group block rounded-2xl bg-[#E9D9B4] p-2 shadow-[0_14px_40px_rgba(221,169,75,.35)] transition hover:-translate-y-1" aria-label="Play the team journey video">
+            <div class="relative overflow-hidden rounded-xl">
+              <div class="ph ph-site aspect-video"></div>
+              <span class="absolute left-1/2 top-1/2 grid h-11 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-xl bg-red-600 text-white shadow-lg transition group-hover:scale-110">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
+              </span>
+              <span class="absolute inset-x-0 bottom-0 bg-night/90 px-3 py-1.5 text-[10px] text-white/90">EcoRoad Solution · Team</span>
+            </div>
+          </a>
 
-        <!-- CONTACT -->
-        <div class="footer-column">
+          <div class="reveal rounded-xl border border-slate-200 bg-white p-6 shadow-card sm:p-7">
+            <h3 class="text-[15px] font-bold text-pine-900">Watch Our Team Journey</h3>
+            <div class="mt-3 space-y-4 text-[13px] leading-relaxed">
+              <p>We are a team of creators and software engineers passionate about technology and sustainability. Through a dynamic and collaborative workflow, we successfully developed EcoRoad, an end-to-end platform designed to automate environmental compliance in highway construction projects.</p>
+              <p>We combine creativity, teamwork, and a user-centered focus to transform traditional environmental monitoring into a simple, efficient, and transparent experience.</p>
+              <p>We invite you to watch our video to discover our collaborative process, the key milestones achieved throughout the project, and individual insights from each team member.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <h4>CONTACT & SUPPORT</h4>
-
-            <p>
-                Technical support for road projects and concessions:
-            </p>
-
-            <a href="mailto:support@ecoroad.com">
-                support@ecoroad.com
-            </a>
-
-            <p>
-                Phone: +51(1) 748-9200
-            </p>
-
-            <p class="footer-cities">
-                Lima &nbsp; • &nbsp; Bogotá &nbsp; • &nbsp; Santiago
-            </p>
-
+    <!-- ================= OUR TEAM ================= -->
+    <section id="our-team" class="border-t border-slate-200/70">
+      <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
+        <div class="text-center">
+          <h2 class="text-2xl font-extrabold tracking-tight text-pine-900 sm:text-[32px]">Our Team</h2>
+          <span class="mx-auto mt-4 block h-1 w-12 rounded-full bg-pine-700"></span>
+          <p class="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed">Meet the multidisciplinary team behind EcoRoad's environmental telemetry platform.</p>
         </div>
 
+        <!-- Reemplaza cada círculo por <img class="mx-auto h-20 w-20 rounded-full object-cover ring-2 ring-pine-200" src="..." alt="Nombre"> -->
+        <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <li class="reveal rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="mx-auto h-20 w-20 rounded-full bg-pine-100 ring-2 ring-pine-200"></div>
+            <p class="mt-4 text-sm font-bold text-gold">Software Engineer</p>
+            <p class="mt-2 text-[13px] leading-relaxed">Software Engineering student with experience in web and mobile development. Focused on building scalable systems using modern technologies and best architecture practices. Passionate about innovation and creating impactful digital solutions.</p>
+          </li>
+          <li class="reveal rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="mx-auto h-20 w-20 rounded-full bg-pine-100 ring-2 ring-pine-200"></div>
+            <p class="mt-4 text-sm font-bold text-gold">Software Engineer</p>
+            <p class="mt-2 text-[13px] leading-relaxed">Software Engineering student focused on creating efficient and scalable solutions. I excel at adapting quickly, teamwork, and proactivity. I solve complex problems using clean code, backed by a solid foundation in C++ and Python.</p>
+          </li>
+          <li class="reveal rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="mx-auto h-20 w-20 rounded-full bg-pine-100 ring-2 ring-pine-200"></div>
+            <p class="mt-4 text-sm font-bold text-gold">Software Engineer</p>
+            <p class="mt-2 text-[13px] leading-relaxed">A punctual, responsible, and goal-oriented individual with experience in project management and web development. I'm focused on contributing my knowledge to make this project a success.</p>
+          </li>
+          <li class="reveal rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="mx-auto h-20 w-20 rounded-full bg-pine-100 ring-2 ring-pine-200"></div>
+            <p class="mt-4 text-sm font-bold text-gold">Software Engineering</p>
+            <p class="mt-2 text-[13px] leading-relaxed">Software Engineering student with experience in web and mobile development. Focused on building scalable systems using modern technologies and best architecture practices. Passionate about innovation and creating impactful digital solutions.</p>
+          </li>
+          <li class="reveal rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+            <div class="mx-auto h-20 w-20 rounded-full bg-pine-100 ring-2 ring-pine-200"></div>
+            <p class="mt-4 text-sm font-bold text-gold">Software Engineering</p>
+            <p class="mt-2 text-[13px] leading-relaxed">A seventh-semester Software Engineering student at UPC, characterized by empathy and strong communication. A team player committed to collaboration and personal growth, who enjoys music, gaming, and sports in their free time.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section id="contact" class="mx-auto max-w-5xl px-4 pb-16 sm:px-6 sm:pb-24">
+      <div class="reveal panel-green rounded-2xl p-8 text-white shadow-lift sm:p-12">
+        <h2 class="max-w-2xl text-2xl font-extrabold leading-tight tracking-tight sm:text-[32px]">Transform the Sustainability &amp; Environmental Compliance of Your Road Infrastructure.</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/85">Request a personalized 20-minute session with our road telemetry engineers and discover how to eliminate non-compliance risks.</p>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a href="#pricing" class="rounded-lg bg-pine-400 px-6 py-3 text-center text-sm font-bold text-pine-900 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-lg">Get Started</a>
+          <a href="mailto:support@ecoroad.com" class="rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-center text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/20">Speak with a Specialist</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-night text-slate-400">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div>
+        <a href="#home" class="flex items-center gap-2">
+          <span class="grid h-9 w-9 place-items-center rounded-lg bg-white text-pine-700">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18c4-1 6-4 8-8s4-5 8-6"/><path d="M12 10c-3 0-5-1.500-6-4 3-.500 5 .500 6 4Z"/></svg>
+          </span>
+          <span class="text-lg font-extrabold text-white">Eco<span class="text-pine-400">Road</span></span>
+        </a>
+        <p class="mt-4 max-w-xs text-xs leading-relaxed">EcoRoad is the SaaS platform specialized in environmental compliance and telemetry mitigation for highways and road concessions.</p>
+        <p class="mt-4 text-xs font-semibold text-white">"Infrastructure today, a better environment"</p>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-white">Modules</p>
+        <ul class="mt-4 space-y-2.5 text-xs">
+          <li><a class="transition-colors hover:text-white" href="#solutions">Air Telemetry (PM10/PM2.5)</a></li>
+          <li><a class="transition-colors hover:text-white" href="#solutions">Noise Monitoring (dBA)</a></li>
+          <li><a class="transition-colors hover:text-white" href="#solutions">Water Quality (pH/NTU)</a></li>
+          <li><a class="transition-colors hover:text-white" href="#solutions">Wildlife Protection</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-white">Regulatory Framework</p>
+        <ul class="mt-4 space-y-2.5 text-xs">
+          <li>ISO 14001:2015 Certification</li>
+          <li>Highway Environmental Directives</li>
+          <li>Environmental Standards Compliance</li>
+          <li>SHA-256 Cryptographic Vault</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-white">Contact &amp; Support</p>
+        <p class="mt-4 text-xs leading-relaxed">Technical support for road projects and concessions.</p>
+        <a href="mailto:support@ecoroad.com" class="mt-3 block text-xs font-semibold text-pine-400 transition-colors hover:text-white">support@ecoroad.com</a>
+        <p class="mt-2 text-xs">Phone: +51 (1) 748-9300</p>
+        <p class="mt-3 text-xs">Lima · Bogotá · Santiago</p>
+      </div>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 EcoRoad Technologies Inc. All rights reserved.
-        </p>
-
-        <div class="footer-links">
-
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Data Security</a>
-
-        </div>
-
+    <div class="border-t border-white/10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-5 text-[11px] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <p>© <span id="year"></span> EcoRoad Technologies Inc. All rights reserved.</p>
+        <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          <li><a class="transition-colors hover:text-white" href="#">Privacy Policy</a></li>
+          <li><a class="transition-colors hover:text-white" href="#">Terms of Service</a></li>
+          <li><a class="transition-colors hover:text-white" href="#">Data Security</a></li>
+        </ul>
+      </div>
     </div>
+  </footer>
 
-</footer>
+  <script>
+    // ---------- Menú hamburguesa ----------
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+    function setMenu(open) {
+      menu.classList.toggle('open', open);
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    btn.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) setMenu(false); });
 
+    // ---------- Selector de idioma (solo estado visual) ----------
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(b => b.addEventListener('click', () => {
+      langBtns.forEach(x => {
+        const on = x === b;
+        x.classList.toggle('bg-pine-600', on);
+        x.classList.toggle('text-white', on);
+        x.classList.toggle('text-slate-600', !on);
+      });
+      document.documentElement.lang = b.dataset.lang;
+    }));
 
+    // ---------- Acordeón ----------
+    document.querySelectorAll('.acc-btn').forEach(b => b.addEventListener('click', () => {
+      const item = b.closest('.acc-item');
+      const open = item.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+    }));
 
+    // ---------- Facturación mensual / anual ----------
+    const billBtns = document.querySelectorAll('.bill-btn');
+    billBtns.forEach(b => b.addEventListener('click', () => {
+      const mode = b.dataset.billing;
+      billBtns.forEach(x => {
+        const on = x === b;
+        x.classList.toggle('bg-pine-900', on);
+        x.classList.toggle('text-white', on);
+        x.classList.toggle('text-slate-700', !on);
+      });
+      document.querySelectorAll('.price').forEach(p => p.textContent = p.dataset[mode]);
+      document.querySelectorAll('.period').forEach(p => p.textContent = mode === 'annual' ? ' / yr' : ' / mo');
+    }));
 
-    <script src="assets/script.js"></script>
+    // ---------- Animación de entrada ----------
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } });
+      }, { threshold: 0.1 });
+      items.forEach(el => io.observe(el));
+    } else {
+      items.forEach(el => el.classList.add('is-visible'));
+    }
 
+    // ---------- Resalta en el navbar la sección visible ----------
+    const navLinks = document.querySelectorAll('#nav-links a');
+    const targets = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function markActive() {
+      const y = window.scrollY + 120;
+      let current = targets[0];
+      targets.forEach(t => { if (t.getBoundingClientRect().top + window.scrollY <= y) current = t; });
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', markActive, { passive: true });
+    markActive();
 
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
